@@ -8,7 +8,7 @@
 - **[RNA-Seq Transcriptomic Pipeline Workflow](#rna-seq-transcriptomic-pipeline-workflow)**
 - **[Usage](#usage)**
     + **[Dependencies](#dependencies)**
-    + **[Installation/Running the Pipeline](#installationrunning-the-pipeline)**
+    + **[Running the Pipeline](#running-the-pipeline)**
 - **[Disclaimer](#disclaimer)**
 - **[References](#references)**
 
@@ -26,12 +26,12 @@ One of the vectors of genetic information of great interest to researchers are v
 2. **Identification of host response pathways.**
     - While this is not one of the objectives of this particular analysis, establishing the genetic expression profile of a host cell over the course of infection can help outline important infection response genes (Zhou et al., 2021).
 3. **Annotation/Characterization of viral genes.**
-    - Transcriptomic analysis allows for the classification of viral genes that may cause/escalate pathogenesis (Ivanov et al., 2023)
+    - Transcriptomic analysis allows for the classification of viral genes that may cause/escalate pathogenesis (Ivanov et al., 2023).
 4. **Classification/prediction of disease severity.**
     - One of the hallmark results of bioinformatic analysis is identifications of biomarkers.
-    - Transcriptomic analysis of host/viral transcriptomes allows researchers to identify biomarkers to elucidate disease progression/severity (Arriaga-Canon et al., 2022)
+    - Transcriptomic analysis of host/viral transcriptomes allows researchers to identify biomarkers to elucidate disease progression/severity (Arriaga-Canon et al., 2022).
 5. **Drug development and discovery.**
-    - In understanding the information above, researchers can take advantage of the molecular mechanisms of viral infection to develop drugs to disrupt virus processes or interactions between the virus and its host (Zhou et al., 2021)
+    - In understanding the information above, researchers can take advantage of the molecular mechanisms of viral infection to develop drugs to disrupt virus processes or interactions between the virus and its host (Zhou et al., 2021).
 
 ### Data
 
@@ -44,19 +44,17 @@ The sequence read archive data used in this analysis is used here:
 - **Donor 3 (2 dpi):** https://www.ncbi.nlm.nih.gov/sra/SRX2896374
 - **Donor 3 (6 dpi):** https://www.ncbi.nlm.nih.gov/sra/SRX2896375
 
-Because this analysis was performed in a UNIX environment, the `wget` command was used to download the data, e.g.
-
+Because this analysis was performed in a UNIX environment, the `wget` command was used to download the data, e.g.:
 ```
 wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360
 ```
-
-More information about the correct subdirectory to download these files to can be found in the [usage](#usage) section.
+More information about the correct subdirectory to download these files to can be found in the [Usage](#usage) section under [Dependencies](#dependencies).
 
 These transcriptomes will be indexed against the HCMV transcriptome (NCBI accession [NC_006273.2](https://www.ncbi.nlm.nih.gov/sra/SRX2896375)) (Gatherer et al., 2011).
 
 ### RNA-Seq Transcriptomic Pipeline Workflow
 
-This pipeline (source code contained in `wrapper.py`) takes RNA-seq viral transcriptomic information and performs the following analyses (many of the results will be printed to the `PipelineProject_Emil_Cacayan/PipelineProject.log` file). For the sake of demonstration, this pipeline will be explained using the data listed in the [data](#data) section. 
+This pipeline (source code contained in `wrapper.py`) takes RNA-seq viral transcriptomic information and performs the following analyses (many of the results will be printed to the `PipelineProject_Emil_Cacayan/PipelineProject.log` file - the directory and file will be created if not already present). For the sake of demonstration, this pipeline will be explained using the data listed in the [data](#data) section. 
 
 1. **Quantification of transcripts per million (TPM) using [kallisto](https://pachterlab.github.io/kallisto/about) (Bray et al., 2016).**
     - First, a transcriptome index for HCMV (see [data](#data)) is built.
@@ -108,7 +106,20 @@ This pipeline (source code contained in `wrapper.py`) takes RNA-seq viral transc
 
 ### Dependencies
 
-### Installation/Running the Pipeline
+To obtain the raw transcriptomic reads, the RNA-Seq data was obtained from the sequence read archive database using `wget` after setting the current working directory as the root directory (`/python_pipeline_project`):
+
+```
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360 -P rna_seq_raw/
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896363 -P rna_seq_raw/
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896374 -P rna_seq_raw/
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896375 -P rna_seq_raw/
+```
+
+This saves the downloaded files into a directory (`/python_pipeline_project/rna_seq_raw/`) - a new directory will be created if one is not already present in the root directory. 
+
+### Running the Pipeline
+
+
 
 ## Disclaimer
 
@@ -141,4 +152,3 @@ Pimentel, H., Bray, N. L., Puente, S., Melsted, P., & Pachter, L. (2017). Differ
 Sudhagar, A., Kumar, G., & El-Matbouli, M. (2018). Transcriptome Analysis Based on RNA-Seq in Understanding Pathogenic Mechanisms of Diseases and the Immune System of Fish: A Comprehensive Review. International journal of molecular sciences, 19(1), 245. https://doi.org/10.3390/ijms19010245
 
 Zhou, A., Dong, X., Liu, M., & Tang, B. (2021). Comprehensive Transcriptomic Analysis Identifies Novel Antiviral Factors Against Influenza A Virus Infection. Frontiers in immunology, 12, 632798. https://doi.org/10.3389/fimmu.2021.632798
-
