@@ -3,18 +3,20 @@
 
 ### Table of Contents
 
+- **[Preface](#preface)**
 - **[Introduction](#introduction)**
 - **[Data](#data)**
-- **[RNA-Seq Transcriptomic Pipeline Workflow](#rna-seq-transcriptomic-pipeline-workflow)**
 - **[Usage](#usage)**
     + **[Dependencies](#dependencies)**
     + **[Running the Pipeline](#running-the-pipeline)**
+- **[RNA-Seq Transcriptomic Pipeline Workflow](#rna-seq-transcriptomic-pipeline-workflow)**
 - **[Disclaimer](#disclaimer)**
 - **[References](#references)**
 
 
 ### Preface
-This is an entirely scripting-based implementation of a bioinformatics pipeline designed to analyze RNA-Seq data. I also wanted to take the opportunity to implement a version heavily inspired by object-oriented design. This repository (including information about the motivations and designs behind such a paradigm for pipeline development) can be found [here](https://github.com/cacayan2/python_pipeline_project_OOP.git).
+
+This is an assignment submission for the class COMP 483 at Loyola University Chicago taught by Dr. Heather Wheeler, and for the submission, I decided to use an entirely scripting-based implementation of a bioinformatics pipeline designed to analyze RNA-Seq data. I also wanted to take the opportunity to implement a version heavily inspired by object-oriented design. This repository (including information about the motivations and designs behind such a paradigm for pipeline development) can be found [here](https://github.com/cacayan2/python_pipeline_project_OOP.git).
 
 ### Introduction
 
@@ -55,6 +57,23 @@ wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360
 More information about the correct subdirectory to download these files to can be found in the [Usage](#usage) section under [Dependencies](#dependencies).
 
 These transcriptomes will be indexed against the HCMV transcriptome (NCBI accession [NC_006273.2](https://www.ncbi.nlm.nih.gov/sra/SRX2896375)) (Gatherer et al., 2011).
+
+### Usage
+
+#### Dependencies
+
+To obtain the raw transcriptomic reads, the RNA-Seq data was obtained from the sequence read archive database using `wget` after setting the current working directory as the root directory (`/python_pipeline_project`):
+
+```
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360 -P rna_seq_raw/
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896363 -P rna_seq_raw/
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896374 -P rna_seq_raw/
+wget https://www.ncbi.nlm.nih.gov/sra/SRX2896375 -P rna_seq_raw/
+```
+
+This saves the downloaded files into a directory (`/python_pipeline_project/rna_seq_raw/`) - a new directory will be created if one is not already present in the root directory. 
+
+#### Running the Pipeline
 
 ### RNA-Seq Transcriptomic Pipeline Workflow
 
@@ -105,25 +124,6 @@ This pipeline (source code contained in `wrapper.py`) takes RNA-seq viral transc
     Donor3:
     saccc   pident   length   qstart   qend   sstart   send   bitscore   evalue   stitle
     ```
-
-## Usage
-
-### Dependencies
-
-To obtain the raw transcriptomic reads, the RNA-Seq data was obtained from the sequence read archive database using `wget` after setting the current working directory as the root directory (`/python_pipeline_project`):
-
-```
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360 -P rna_seq_raw/
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896363 -P rna_seq_raw/
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896374 -P rna_seq_raw/
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896375 -P rna_seq_raw/
-```
-
-This saves the downloaded files into a directory (`/python_pipeline_project/rna_seq_raw/`) - a new directory will be created if one is not already present in the root directory. 
-
-### Running the Pipeline
-
-
 
 ## Disclaimer
 
