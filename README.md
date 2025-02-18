@@ -16,7 +16,7 @@
 
 ### Preface
 
-This is an assignment submission for the class COMP 483 at Loyola University Chicago taught by Dr. Heather Wheeler, and for the submission, I decided to use an entirely scripting-based implementation of a bioinformatics pipeline designed to analyze RNA-Seq data. I also wanted to take the opportunity to implement a version heavily inspired by object-oriented design. This repository (including information about the motivations and designs behind such a paradigm for pipeline development) can be found [here](https://github.com/cacayan2/python_pipeline_project_OOP.git).
+This is an assignment submission for the class COMP 483 at Loyola University Chicago taught by Dr. Heather Wheeler, and for the submission, I decided to use an entirely scripting-based implementation of a bioinformatics pipeline designed to analyze RNA-Seq data. I also wanted to take the opportunity to implement a version heavily inspired by object-oriented design which still fulfills the requirements outlined in the original assignment. This repository (including information about the motivation and designs behind such a paradigm for pipeline development) can be found [here](https://github.com/cacayan2/python_pipeline_project_OOP.git).
 
 ### Introduction
 
