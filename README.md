@@ -12,6 +12,10 @@
 - **[Disclaimer](#disclaimer)**
 - **[References](#references)**
 
+
+### Preface
+This is an entirely scripting-based implementation of a bioinformatics pipeline designed to analyze RNA-Seq data. I also wanted to take the opportunity to implement a version heavily inspired by object-oriented design. This repository (including information about the motivations and designs behind such a paradigm for pipeline development) can be found [here](https://github.com/cacayan2/python_pipeline_project_OOP.git).
+
 ### Introduction
 
 Transcriptomics is the study of the sum set of all RNA transcripts in a cell, organism, or other entity that manipulates genetic information. It is distinct from genomics as it provides a real-time view of the nexus between the information stored in genetic material and how it may be expressed. 
@@ -99,7 +103,7 @@ This pipeline (source code contained in `wrapper.py`) takes RNA-seq viral transc
     sacc   pident    length   qstart   qend   sstart   send   bitscore   evalue   stitle
 
     Donor3:
-    saccc   pident   length   qstart   qend   sstart   send   bitscore   evalue   stitle.
+    saccc   pident   length   qstart   qend   sstart   send   bitscore   evalue   stitle
     ```
 
 ## Usage
