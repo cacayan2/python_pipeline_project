@@ -51,9 +51,7 @@ The sequence read archive data used in this analysis is used here:
 - **Donor 3 (6 dpi):** https://www.ncbi.nlm.nih.gov/sra/SRX2896375
 
 Because this analysis was performed in a UNIX environment, the `wget` command was used to download the data, e.g.:
-```
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360
-```
+
 More information about the correct subdirectory to download these files to can be found in the [Usage](#usage) section under [Dependencies](#dependencies).
 
 These transcriptomes will be indexed against the HCMV transcriptome (NCBI accession [NC_006273.2](https://www.ncbi.nlm.nih.gov/sra/SRX2896375)) (Gatherer et al., 2011).
