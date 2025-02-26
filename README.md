@@ -170,7 +170,7 @@ This pipeline (source code contained in `wrapper.py`) takes RNA-seq viral transc
     - The number of reads in each transcriptome before and after the Bowtie2 mapping will be written to `PipelineProject.log` in the following fashion:
     ```
     Donor 1 (2dpi) had 230000 read pairs before Bowtie2 filtering and 100000 read pairs after.
-    Donor 2 (6dpi) had 230000 read pairs before Bowtie2 filtering and 100000 read pairs after.
+    Donor 1 (6dpi) had 230000 read pairs before Bowtie2 filtering and 100000 read pairs after.
     Donor 3 (2dpi) had 230000 read pairs before Bowtie2 filtering and 100000 read pairs after.
     Donor 3 (6dpi) had 230000 read pairs before Bowtie2 filtering and 100000 read pairs after.
     ```
