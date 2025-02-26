@@ -3,20 +3,15 @@
 
 ### Table of Contents
 
-- **[Preface](#preface)**
 - **[Introduction](#introduction)**
 - **[Data](#data)**
 - **[Usage](#usage)**
     + **[Dependencies](#dependencies)**
-    + **[Running the Pipeline](#running-the-pipeline)**
+    + **[The `input_srr` File](#the-input_srr-file)**
+    + **[Command Arguments](#command-arguments)**
 - **[RNA-Seq Transcriptomic Pipeline Workflow](#rna-seq-transcriptomic-pipeline-workflow)**
 - **[Disclaimer](#disclaimer)**
 - **[References](#references)**
-
-
-### Preface
-
-This is an assignment submission for the class COMP 483 at Loyola University Chicago taught by Dr. Heather Wheeler, and for the submission, I decided to use an entirely scripting-based implementation of a bioinformatics pipeline designed to analyze RNA-Seq data. I also wanted to take the opportunity to implement a version heavily inspired by object-oriented design which still fulfills the requirements outlined in the original assignment. This repository (including information about the motivation and designs behind such a paradigm for pipeline development) can be found [here](https://github.com/cacayan2/python_pipeline_project_OOP.git).
 
 ### Introduction
 
@@ -52,26 +47,98 @@ The sequence read archive data used in this analysis is used here:
 
 Because this analysis was performed in a UNIX environment, the `wget` command was used to download the data, e.g.:
 
-More information about the correct subdirectory to download these files to can be found in the [Usage](#usage) section under [Dependencies](#dependencies).
+More information about how to correctly obtain these files to can be found in the [Usage](#usage) section under [The `input_srr` File](#the-input_srr-file).
 
 These transcriptomes will be indexed against the HCMV transcriptome (NCBI accession [NC_006273.2](https://www.ncbi.nlm.nih.gov/sra/SRX2896375)) (Gatherer et al., 2011).
 
 ### Usage
+The goal of the design of this pipeline is to make its use as user-friendly and oriented as possible.
+
+There are only two things that you have to change:
+1. The `input_srr` file.
+2. The command itself.
 
 #### Dependencies
+Use of this repository requires the following software:
+- [Linux/Unix](https://www.linux.org/pages/download/)
+- [Python3](https://www.python.org/downloads/)
+- [Biopython](https://biopython.org/wiki/Download)
+- [Kallisto](https://pachterlab.github.io/kallisto/download)
+- [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
+- [SPAdes](https://github.com/ablab/spades)
+- [`R` (Software)](https://cran.r-project.org/bin/windows/base/)
+- [BLAST+ suite](https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html)
+- [SRA Toolkit (for fasterq-dump)](https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit) 
 
-To obtain the raw transcriptomic reads, the RNA-Seq data was obtained from the sequence read archive database using `wget` after setting the current working directory as the root directory (`/python_pipeline_project`):
+#### The `input_srr` File
+In the root directory, you will find a file called `input_srr`. In this file, four SRR accession numbers will already be present. In this file, just put in any number of SRR accession numbers and the pipeline will execute on all the SRR numbers (for now, this implementation works on only paired-end reads).
+
+The SRR accession numbers already present, which are:
 
 ```
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896360 -P rna_seq_raw/
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896363 -P rna_seq_raw/
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896374 -P rna_seq_raw/
-wget https://www.ncbi.nlm.nih.gov/sra/SRX2896375 -P rna_seq_raw/
+SRR5660030
+SRR5660033
+SRR5660044
+SRR5660045
 ```
 
-This saves the downloaded files into a directory (`/python_pipeline_project/rna_seq_raw/`) - a new directory will be created if one is not already present in the root directory. 
+Are the accession numbers associated with the HCMV study outlined in the beginning of the [Data](#data) section. If you would like to use different sequence read archive numbers, simply open the SRA entry and copy-and-paste the run number into the `input_srr` file (keep in mind run numbers and SRA accession numbers are distinct from one another - the SRR number associated with the SRA accession number SRX2896360 has an associated run number of SRR5660030 - in other words, what goes into the `input_srr` file isn't the SRA accession number but run numbers).
 
-#### Running the Pipeline
+This is important because to obtain the raw transcriptomic reads, the RNA-Seq data was obtained from the sequence read archive database using `wget` after setting the current working directory as the root directory (`/python_pipeline_project` - the links provided below are the direct download links, found by opening the SRA run browser and navigating to the data access tab, the data used here is from AWS in the SRA normalized format):
+
+**Please note the below command is shown for the sake of demonstration - by entering your SRR numbers into the `input_srr` file, these links are generated automatically**. 
+```
+wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660030/SRR5660030 
+wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660033/SRR5660033 
+wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660044/SRR5660044 
+wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660045/SRR5660045 
+```
+
+The `input_srr` file will download the data associated with the sequence read archive run in its entirety. This means each time that you run the pipeline, the SRR is entirely downloaded each time. If you would like to run the pipeline on a truncated sample dataset, please see the [Command Arguments](#command-arguments) section.
+
+#### Command Arguments
+To run the script, please clone the repository:
+
+```
+git clone https://github.com/cacayan2/python_pipeline_project
+```
+
+The repository contains a test dataset (a subset of 40,000 lines corresponding to 10,000 reads) from the input fastq files (used the `head` command to do this) after manually downloading with `wget` and unpacking with `fasterq-dump`. 
+
+Use of the test data set will allow you to test a smaller dataset without having to wait for the SRR to download (since it is already present in the repository) to allow for troubleshooting.
+
+The command to run the script is as follows:
+
+```
+python3 wrapper.py -r <reference_accession> -c <t/f>
+```
+
+Here is a brief explanation of the arguments:
+```
+-r/--reference: 
+The accession number to be used as a reference genome/transcriptome. For this particular analysis, the accession NC_006273.2 is used, but in theory any accession can be used as an argument.
+
+-c/--condensed:
+This is where whether the pipeline will be run on the test dataset or pull the full dataset from NCBI bnefore running. Valid values are true/True/t/T or false/False/f/F. The false option allows the pipeline to run with the full dataset that it pulls from NCBI, while the true option allows the pipeline to run with the test dataset. 
+```
+
+So for this analysis, to run the pipeline on the full dataset, use the command:
+```
+python3 wrapper.py -r "NC_006273.2" -c F
+```
+This command iterates through the `input_srr` file and downloads/unpacks the appropriate sequence read archive runs from NCBI. 
+
+To run on the sample dataset, use the command:
+```
+python3 wrapper.py -r "NC_006273.2" -c T
+```
+This command skips downloading and unpacking the appropriate sequence read archive runs from NCBI and instead conducts the rest of the analysis on the files contained in the `sample_data` directory. 
+
+Upon running either of these commands for the first time, you will notice a directory called `processed_data` is created - please do not move/delete any files/directories in this directory while the pipeline is running - the pipeline relies on the structure of this folder in order to complete its analysis. Also, please keep in mind that every time that this pipeline is started, if the `processed_data` directory is present in the root directory, it and its contents will be deleted and replaced with empty versions to prevent data pollution in subsequent uses of the pipeline.  
+
+The full output will be updated as the pipeline moves along in the file `processed_data/output_log/output.txt`, and minimal updates will be sent to the terminal. 
+
+For this assignment, one of the requirements was the creation of a log file that outputted certain results from the analysis. The original log file can be found in `PipelineProject_Emil_Cacayan/PipelineProject.log`. To prevent any changes from going to this log file, a new directory with a new log file was made and the current implementation of this pipeline writes to this new log file (`PipelineProject/PipelineProject.log`).
 
 ### RNA-Seq Transcriptomic Pipeline Workflow
 
