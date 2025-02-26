@@ -29,7 +29,7 @@ One of the vectors of genetic information of great interest to researchers are v
 3. **Annotation/Characterization of viral genes.**
     - Transcriptomic analysis allows for the classification of viral genes that may cause/escalate pathogenesis (Ivanov et al., 2023).
 4. **Classification/prediction of disease severity.**
-    - One of the hallmark results of bioinformatic analysis is identifications of biomarkers.
+    - One of the hallmark results of bioinformatic analysis is identification of biomarkers.
     - Transcriptomic analysis of host/viral transcriptomes allows researchers to identify biomarkers to elucidate disease progression/severity (Arriaga-Canon et al., 2022).
 5. **Drug development and discovery.**
     - In understanding the information above, researchers can take advantage of the molecular mechanisms of viral infection to develop drugs to disrupt virus processes or interactions between the virus and its host (Zhou et al., 2021).
@@ -45,7 +45,7 @@ The sequence read archive data used in this analysis is used here:
 - **Donor 3 (2 dpi):** https://www.ncbi.nlm.nih.gov/sra/SRX2896374
 - **Donor 3 (6 dpi):** https://www.ncbi.nlm.nih.gov/sra/SRX2896375
 
-Because this analysis was performed in a UNIX environment, the `wget` command was used to download the data, e.g.:
+Because this analysis was performed in a UNIX environment, the `wget` command was used to download the data.
 
 More information about how to correctly obtain these files to can be found in the [Usage](#usage) section under [The `input_srr` File](#the-input_srr-file).
 
