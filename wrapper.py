@@ -94,9 +94,9 @@ def main():
         # Finding alignments with BLAST (generating the local database then running blastn).
         print("Generating alignments with BLAST...")
         blast = Blast(srr_list)
-        blast.makeblastdb(ref_accession)
+        blast.makeblastdb(ref_accession) # Please keep in mind the databased used does not only use RefSeq - this was not strictly required. 
         blast.blast()
-        blast.print_log()
+        blast.print_log() 
 
         print("Finished pipeline!")
 

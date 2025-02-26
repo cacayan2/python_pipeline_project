@@ -138,7 +138,7 @@ Upon running either of these commands for the first time, you will notice a dire
 
 The full output will be updated as the pipeline moves along in the file `processed_data/output_log/output.txt`, and minimal updates will be sent to the terminal. 
 
-For this assignment, one of the requirements was the creation of a log file that outputted certain results from the analysis. The original log file can be found in `PipelineProject_Emil_Cacayan/PipelineProject.log`. To prevent any changes from going to this log file, a new directory with a new log file was made and the current implementation of this pipeline writes to this new log file (`PipelineProject/PipelineProject.log`).
+For this assignment, one of the requirements was the creation of a log file that outputted certain results from the analysis. The original log file can be found in `PipelineProject_Emil_Cacayan/PipelineProject.log`. To prevent any changes from going to this log file, a new directory with a new log file was made and the current implementation of this pipeline writes to this new log file (`PipelineProject/PipelineProject.log`). As a last note, for the BLAST alignment, creation of the database did not only include RefSeq accessions as that was not explicitly required. 
 
 ### RNA-Seq Transcriptomic Pipeline Workflow
 
