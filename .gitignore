@@ -3,3 +3,4 @@ __pycache__/
 processed_data/
 generate_test_data/
 fasterq.tmp.gauss.*/
+PipelineProject/
